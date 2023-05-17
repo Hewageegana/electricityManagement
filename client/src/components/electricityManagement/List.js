@@ -3,6 +3,7 @@ import "../../css/List.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
+import swal from "sweetalert";
 
 export default function AdminList() {
 
@@ -20,6 +21,25 @@ export default function AdminList() {
       })
       .catch(() => { });
   };
+
+  const deleteElectric = async(item) => {
+    axios.delete(`/electricityy/delete/${item._id}`)
+    .then((res) => {
+        swal({
+            title: "Success!",
+            text: "Successfully deleted the Record",
+            icon: "success",
+            button: "Ok",
+          });
+        getElectricty()
+    }).catch(err => {
+        console.log(err)
+    })
+}
+
+const onUpdateElec = (item) => {
+  window.location = `/editEleTyp/${item._id}`
+}
 
   return (
     <div>
@@ -47,15 +67,15 @@ export default function AdminList() {
                 </p>
                 <p className="text-muted mt-3">
                   Price : Rs<span style={{ marginRight: 25}}>{item.price}</span>
-                  Number<span>{item.electricityNumber}</span>
+                  Number :  <span>{item.electricityNumber}</span>
                 </p>
               </div>
               <div className="col-md-4">
-                <Button variant="success" className="btn-set">
+                <Button variant="success" onClick={() => onUpdateElec(item)} className="btn-set">
                   Edit
                 </Button>{" "}
                 <br></br>
-                <Button variant="danger" className="mt-3 btn-set">
+                <Button variant="danger" onClick={() => deleteElectric(item)} className="mt-3 btn-set">
                   Delete
                 </Button>{" "}
               </div>
