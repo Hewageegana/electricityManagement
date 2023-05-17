@@ -8,7 +8,7 @@
   font-weight: bold;
 }
 
-form {
+/* form {
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
@@ -63,4 +63,4 @@ input[type="file"]::-webkit-file-upload-button {
 
 input[type="file"]::-webkit-file-upload-button:hover {
   background-color: #45a049;
-}
+} */

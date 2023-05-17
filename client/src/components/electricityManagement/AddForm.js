@@ -10,11 +10,11 @@ import swal from "sweetalert";
 
 export default function AddElectricityType() {
   const [validated, setValidated] = useState(false);
-  const [electricityNumber, setElectricityNumber] = useState('');
-  const [electricityType, setElectricityType] = useState('');
+  const [electricityNumber, setElectricityNumber] = useState("");
+  const [electricityType, setElectricityType] = useState("");
 
-  const [price, setPrice] = useState('');
-  const [description, setDescription] = useState('');
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
 
   const handleSubmit = (event) => {
     setValidated(true);
@@ -26,24 +26,26 @@ export default function AddElectricityType() {
       electricityNumber,
       electricityType,
       price,
-      description
-    }
-    axios.post('/electricityy/add', newElectricty)
+      description,
+    };
+    axios
+      .post("/electricityy/add", newElectricty)
       .then((res) => {
         swal({
-            title: "Success!",
-            text: "Successfully added the electricty",
-            icon: "success",
-            button: "Ok",
-          });
+          title: "Success!",
+          text: "Successfully added the electricty",
+          icon: "success",
+          button: "Ok",
+        });
 
-          setTimeout(() => {
-            window.location.replace("../adminList") 
-          }, 2000)
-        console.log(res.data, "ererwerew222222==========================")
-      }).catch(err => {
-        console.log(err, "-----------------------------")
+        setTimeout(() => {
+          window.location.replace("../adminList");
+        }, 2000);
+        console.log(res.data, "ererwerew222222==========================");
       })
+      .catch((err) => {
+        console.log(err, "-----------------------------");
+      });
     // if (form.checkValidity() === false) {
     //   event.preventDefault();
     //   event.stopPropagation();
@@ -68,7 +70,6 @@ export default function AddElectricityType() {
     //     })
 
     // }
-
   };
 
   return (
@@ -115,10 +116,12 @@ export default function AddElectricityType() {
         <Row className="mb-3">
           <Form.Group as={Col} md="6" controlId="validationCustom03">
             <Form.Label className="text-dark fw-bold">Cost</Form.Label>
-            <Form.Control type="text"
+            <Form.Control
+              type="text"
               placeholder="Cost"
               onChange={(e) => setPrice(e.target.value)}
-              required />
+              required
+            />
             <Form.Control.Feedback type="invalid">
               Please provide a valid city.
             </Form.Control.Feedback>
@@ -138,7 +141,7 @@ export default function AddElectricityType() {
           </Form.Group>
         </Row>
         <Button type="submit" className="mt-5">
-          Submit form
+          ADD ELECTRICITY TYPE
         </Button>
       </Form>
     </div>
