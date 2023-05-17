@@ -36,6 +36,10 @@ export default function AddElectricityType() {
             icon: "success",
             button: "Ok",
           });
+
+          setTimeout(() => {
+            window.location = "./adminList"
+          })
         console.log(res.data, "ererwerew222222==========================")
       }).catch(err => {
         console.log(err, "-----------------------------")
