@@ -6,6 +6,7 @@ import AdminList from "./components/electricityManagement/List";
 import AddElectricityType from "./components/electricityManagement/AddForm";
 
 import ElectricityConnectionForm from "./components/electricityManagement/ElectricityConnectionForm";
+import EditElectricityType from "./components/electricityManagement/EditForm";
 function App() {
   return (
     <Router>
@@ -15,6 +16,7 @@ function App() {
         <Route path="/adminList" element={<AdminList />} />
         <Route path="/addEleTyp" element={<AddElectricityType />} />
         <Route path="/connectionForm" element={<ElectricityConnectionForm />} />
+        <Route path="/editEleTyp/:id" element={<EditElectricityType />} />
       </Routes>
     </Router>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
@@ -7,14 +7,34 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
 import axios from "axios";
 import swal from "sweetalert";
+import { useParams } from "react-router-dom";
 
-export default function AddElectricityType() {
+export default function EditElectricityType() {
   const [validated, setValidated] = useState(false);
   const [electricityNumber, setElectricityNumber] = useState('');
   const [electricityType, setElectricityType] = useState('');
 
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
+  const { id } = useParams();
+
+  useEffect(() => {
+
+    getElectric();
+}, []);
+const getElectric = async () => {
+    const res = await axios
+        .get("/electricityy/electricityy/" + id)
+        .then((res) => {
+            setElectricityNumber(res.data.electricityNumber)
+            setElectricityType(res.data.electricityType)
+            setPrice(res.data.price)
+            setDescription(res.data.description)
+        })
+        .catch(() => { 
+            console.log("sadsadas;ldsad;alsd;l")
+        });
+};
 
   const handleSubmit = (event) => {
     setValidated(true);
@@ -23,16 +43,17 @@ export default function AddElectricityType() {
     event.stopPropagation();
 
     const newElectricty = {
+        "_id": id,
       electricityNumber,
       electricityType,
       price,
       description
     }
-    axios.post('/electricityy/add', newElectricty)
+    axios.put('/electricityy/update/' + id, newElectricty)
       .then((res) => {
         swal({
             title: "Success!",
-            text: "Successfully added the electricty",
+            text: "Successfully edited the electricty",
             icon: "success",
             button: "Ok",
           });
@@ -74,7 +95,7 @@ export default function AddElectricityType() {
   return (
     <div className="container">
       <div className="text-center fs-4 fw-bold text-white">
-        Add A New Electricity Type
+        Update Electricity Type
       </div>
       <Form
         noValidate
@@ -90,6 +111,7 @@ export default function AddElectricityType() {
             <Form.Control
               required
               type="text"
+              value={electricityNumber}
               placeholder="Electricity Number"
               onChange={(e) => setElectricityNumber(e.target.value)}
             />
@@ -104,6 +126,7 @@ export default function AddElectricityType() {
             <Form.Control
               required
               type="text"
+              value={electricityType}
               placeholder="Electricity Type"
               onChange={(e) => setElectricityType(e.target.value)}
             />
@@ -117,6 +140,7 @@ export default function AddElectricityType() {
             <Form.Label className="text-dark fw-bold">Cost</Form.Label>
             <Form.Control type="text"
               placeholder="Cost"
+              value={price}
               onChange={(e) => setPrice(e.target.value)}
               required />
             <Form.Control.Feedback type="invalid">
@@ -129,6 +153,7 @@ export default function AddElectricityType() {
               type="text"
               row="10"
               placeholder="Description"
+              value={description}
               required
               onChange={(e) => setDescription(e.target.value)}
             />
@@ -138,7 +163,7 @@ export default function AddElectricityType() {
           </Form.Group>
         </Row>
         <Button type="submit" className="mt-5">
-          Submit form
+          Update form
         </Button>
       </Form>
     </div>
