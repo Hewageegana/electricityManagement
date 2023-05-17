@@ -1,11 +1,6 @@
 const mongoose = require("mongoose");
 
 const requestFormSchema = new mongoose.Schema({
-  ElectricityType: {
-    type: String,
-    required: true,
-  },
-
   fullName: {
     type: String,
     required: true,
@@ -17,6 +12,10 @@ const requestFormSchema = new mongoose.Schema({
   },
 
   Location: {
+    type: String,
+    required: true,
+  },
+  loadRequirement: {
     type: String,
     required: true,
   },
