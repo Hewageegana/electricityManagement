@@ -1,15 +1,15 @@
 const mongoose = require("mongoose");
 
 const ElectricitySchema = new mongoose.Schema({
-  ElectricityId: {
+  // ElectricityId: {
+  //   type: String,
+  //   required: true,
+  // },
+  electricityType: {
     type: String,
     required: true,
   },
-  ElectricityType: {
-    type: String,
-    required: true,
-  },
-  Price: {
+  price: {
     type: String,
     required: true,
   },
@@ -19,7 +19,7 @@ const ElectricitySchema = new mongoose.Schema({
     required: true,
   },
 
-  Image: {
+  electricityNumber: {
     type: String,
     required: true,
   },
